@@ -135,23 +135,23 @@ void mergeSort(List<string> listaContatti)
 {
     if (listaContatti.Count <= 1)
     {
-        return; // Se la lista ha 1 o 0 elementi, è già ordinata
+        return; 
     }
 
     int metà = listaContatti.Count / 2;
 
-    // Dividi la lista in due metà
+    
     List<string> sinistra = listaContatti.GetRange(0, metà);  // Prima metà
     List<string> destra = listaContatti.GetRange(metà, listaContatti.Count - metà);  // Seconda metà
 
-    // Ordina le due metà ricorsivamente
+    
     mergeSort(sinistra);
     mergeSort(destra);
 
-    // Unisci le due metà ordinate
+    
     List<string> listaOrdinata = merge(sinistra, destra);
 
-    // Copia la lista ordinata nella lista originale
+    
     for (int i = 0; i < listaContatti.Count; i++)
     {
         listaContatti[i] = listaOrdinata[i];
@@ -163,7 +163,7 @@ List<string> merge(List<string> sinistra, List<string> destra)
     List<string> risultato = new List<string>();
     int i = 0, j = 0;
 
-    // Confronta e unisci le due liste fino a che ci sono elementi in entrambe
+    
     while (i < sinistra.Count && j < destra.Count)
     {
         if (string.Compare(sinistra[i], destra[j]) <= 0)
@@ -178,21 +178,21 @@ List<string> merge(List<string> sinistra, List<string> destra)
         }
     }
 
-    // Aggiungi gli elementi rimanenti nella lista sinistra (se ci sono)
+    
     while (i < sinistra.Count)
     {
         risultato.Add(sinistra[i]);
         i++;
     }
 
-    // Aggiungi gli elementi rimanenti nella lista destra (se ci sono)
+    
     while (j < destra.Count)
     {
         risultato.Add(destra[j]);
         j++;
     }
 
-    return risultato;  // Restituisci la lista unita e ordinata
+    return risultato;  
 
 }
 
