@@ -44,7 +44,7 @@ for (int i = 1; i < tempi.Length; i++)
 Console.WriteLine($"L'algoritmo più performante è {nomiMetodi[appoggio]}, con un tempo di: {tempi[appoggio]}");
 string fileNuovo = @"C:\Users\dpace\Desktop\rubricaOrdinata.csv";
 
-File.AppendAllLines(fileNuovo, listaContatti);
+File.WriteAllLines(fileNuovo, listaContatti);
 
 Console.WriteLine("Lista ordinata salvata in un file");
 
@@ -197,13 +197,6 @@ List<string> merge(List<string> sinistra, List<string> destra)
 }
 
 
-void stampaContatti()
-{
-    foreach (var linee in listaContatti)
-    {
-        Console.WriteLine(linee);
-    }
-}
 
 
 
@@ -220,21 +213,3 @@ void stampaContatti()
 
 
 
-/* for (int i = 0; i < listaContatti.Count; i++)
-{
-    for (int j = i + 1; j > 0; j--)
-    {
-
-        var comparazione = string.Compare(listaContatti[j - 1], listaContatti[j]);
-
-        if (comparazione > 0)
-        {
-            int appoggio = listaContatti[j - 1];
-                listaContatti[j - 1] = listaContatti[j];
-                listaContatti[j] = appoggio;
-
-        }
-
-    }
-}
-stampaContatti(); */
