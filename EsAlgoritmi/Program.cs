@@ -141,8 +141,8 @@ void mergeSort(List<string> listaContatti)
     int metà = listaContatti.Count / 2;
 
     
-    List<string> sinistra = listaContatti.GetRange(0, metà);  // Prima metà
-    List<string> destra = listaContatti.GetRange(metà, listaContatti.Count - metà);  // Seconda metà
+    List<string> sinistra = listaContatti.GetRange(0, metà);  
+    List<string> destra = listaContatti.GetRange(metà, listaContatti.Count - metà);  
 
     
     mergeSort(sinistra);
