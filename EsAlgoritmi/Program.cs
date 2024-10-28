@@ -8,34 +8,29 @@ var rubricaMergeSort = File.ReadAllLines(percorsoRubricaCsv).ToList();
 
 Stopwatch timer = new Stopwatch();
 
-
-
-
-
+timer.Start();
+BubbleSort();
+timer.Stop();
+TimeSpan trascorsoBubble = timer.Elapsed;
+Console.WriteLine($"Il tempo impiegato dal Bubble Sort è stato di: {trascorsoBubble}");
 
 timer.Restart();
-selectionSort();
+SelectionSort();
 timer.Stop();
 TimeSpan trascorsoSelection = timer.Elapsed;
 Console.WriteLine($"Il tempo impiegato dal Selection Sort è stato di: {trascorsoSelection}");
 
 timer.Restart();
-insertionSort();
+InsertionSort();
 timer.Stop();
 TimeSpan trascorsoInsertion = timer.Elapsed;
 Console.WriteLine($"Il tempo impiegato dall'Insertion Sort è stato di: {trascorsoInsertion}");
 
 timer.Restart();
-mergeSort(rubricaMergeSort);
+MergeSort(rubricaMergeSort);
 timer.Stop();
 TimeSpan trascorsoMerge = timer.Elapsed;
 Console.WriteLine($"Il tempo impiegato dal Merge Sort è stato di: {trascorsoMerge}");
-
-timer.Start();
-bubbleSort();
-timer.Stop();
-TimeSpan trascorsoBubble = timer.Elapsed;
-Console.WriteLine($"Il tempo impiegato dal Bubble Sort è stato di: {trascorsoBubble}");
 
 TimeSpan[] tempi = { trascorsoBubble, trascorsoSelection, trascorsoInsertion, trascorsoMerge };
 
@@ -49,7 +44,6 @@ for (int i = 1; i < tempi.Length; i++)
     }
 }
 
-
 Console.WriteLine($"L'algoritmo più performante è {nomiMetodi[appoggio]}, con un tempo di: {tempi[appoggio]}");
 string fileNuovo = @"C:\Users\dpace\Desktop\rubricaOrdinata.csv";
 
@@ -57,7 +51,7 @@ File.WriteAllLines(fileNuovo, rubricaContattiOriginali);
 
 Console.WriteLine("Lista ordinata salvata in un file");
 
-void bubbleSort()
+void BubbleSort()
 {
 
 
@@ -65,15 +59,15 @@ void bubbleSort()
     {
         for (int j = 0; j < rubricaContattiOriginali.Count - i - 1; j++)
         {
-            var nomi = rubricaContattiOriginali[j].Split(',');
-            var nomiDue = rubricaContattiOriginali[j + 1].Split(',');
+            string[] nominativiPrimoElemento = rubricaContattiOriginali[j].Split(',');
+            string[] nominativiSecondoElemento = rubricaContattiOriginali[j + 1].Split(',');
 
 
-            var comparazione = string.Compare(nomi[0], nomiDue[0]);
+            var comparazione = string.Compare(nominativiPrimoElemento[0], nominativiSecondoElemento[0]);
 
             if (comparazione == 0)
             {
-                comparazione = string.Compare(nomi[1], nomiDue[1]);
+                comparazione = string.Compare(nominativiPrimoElemento[1],nominativiSecondoElemento[1]);
             }
 
             if (comparazione > 0)
@@ -88,7 +82,7 @@ void bubbleSort()
     }
 }
 
-void selectionSort()
+void SelectionSort()
 {
     for (int i = 0; i < rubricaSelectionSort.Count - 1; i++)
     {
@@ -96,14 +90,14 @@ void selectionSort()
 
         for (int j = i + 1; j < rubricaSelectionSort.Count; j++)
         {
-            var contattoMin = rubricaSelectionSort[minIndex].Split(',');
+            var contattoMinimo = rubricaSelectionSort[minIndex].Split(',');
             var contattoCorrente = rubricaSelectionSort[j].Split(',');
 
-            var comparazione = string.Compare(contattoCorrente[0], contattoMin[0]);
+            var comparazione = string.Compare(contattoCorrente[0], contattoMinimo[0]);
 
             if (comparazione == 0)
             {
-                comparazione = string.Compare(contattoCorrente[1], contattoMin[1]);
+                comparazione = string.Compare(contattoCorrente[1], contattoMinimo[1]);
             }
 
             if (comparazione < 0)
@@ -122,25 +116,25 @@ void selectionSort()
     }
 }
 
-void insertionSort()
+void InsertionSort()
 {
     for (int i = 1; i < rubricaInsertionSort.Count; i++)
     {
-        var indiceMigliorTempo = rubricaInsertionSort[i];
-        int j = i - 1;
+        var contattoDaInserire = rubricaInsertionSort[i]; 
+        int j = i - 1; 
 
 
-        while (j >= 0 && string.Compare(rubricaInsertionSort[j], indiceMigliorTempo) > 0)
+        while (j >= 0 && string.Compare(rubricaInsertionSort[j], contattoDaInserire) > 0) 
         {
             rubricaInsertionSort[j + 1] = rubricaInsertionSort[j];
             j--;
         }
 
-        rubricaInsertionSort[j + 1] = indiceMigliorTempo;
+        rubricaInsertionSort[j + 1] = contattoDaInserire;
     }
 }
 
-void mergeSort(List<string> rubricaMergeSort)
+void MergeSort(List<string> rubricaMergeSort)
 {
     if (rubricaMergeSort.Count <= 1)
     {
@@ -154,8 +148,8 @@ void mergeSort(List<string> rubricaMergeSort)
     List<string> destra = rubricaMergeSort.GetRange(metà, rubricaMergeSort.Count - metà);  
 
     
-    mergeSort(sinistra);
-    mergeSort(destra);
+    MergeSort(sinistra);
+    MergeSort(destra);
 
     
     List<string> listaOrdinata = merge(sinistra, destra);
@@ -204,21 +198,3 @@ List<string> merge(List<string> sinistra, List<string> destra)
     return risultato;  
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
