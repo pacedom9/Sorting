@@ -53,15 +53,12 @@ Console.WriteLine("Lista ordinata salvata in un file");
 
 void BubbleSort()
 {
-
-
     for (int i = 0; i < rubricaContattiOriginali.Count; i++)
     {
         for (int j = 0; j < rubricaContattiOriginali.Count - i - 1; j++)
         {
             string[] nominativiPrimoElemento = rubricaContattiOriginali[j].Split(',');
             string[] nominativiSecondoElemento = rubricaContattiOriginali[j + 1].Split(',');
-
 
             int comparazione = string.Compare(nominativiPrimoElemento[0], nominativiSecondoElemento[0]);
 
@@ -76,7 +73,6 @@ void BubbleSort()
                 rubricaContattiOriginali[j] = rubricaContattiOriginali[j + 1];
                 rubricaContattiOriginali[j + 1] = contattoTemporaneo;
             }
-
 
         }
     }
@@ -105,7 +101,6 @@ void SelectionSort()
                 valoreMinimo = j;
             }
         }
-
 
         if (valoreMinimo != i)
         {
@@ -143,17 +138,13 @@ void MergeSort(List<string> rubricaMergeSort)
 
     int metà = rubricaMergeSort.Count / 2;
 
-    
     List<string> sinistra = rubricaMergeSort.GetRange(0, metà);  
     List<string> destra = rubricaMergeSort.GetRange(metà, rubricaMergeSort.Count - metà);  
-
     
     MergeSort(sinistra);
     MergeSort(destra);
-
     
     List<string> listaOrdinata = merge(sinistra, destra);
-
     
     for (int i = 0; i < rubricaMergeSort.Count; i++)
     {
@@ -165,7 +156,6 @@ List<string> merge(List<string> sinistra, List<string> destra)
 {
     List<string> risultato = new List<string>();
     int i = 0, j = 0;
-
     
     while (i < sinistra.Count && j < destra.Count)
     {
@@ -180,14 +170,12 @@ List<string> merge(List<string> sinistra, List<string> destra)
             j++;
         }
     }
-
     
     while (i < sinistra.Count)
     {
         risultato.Add(sinistra[i]);
         i++;
     }
-
     
     while (j < destra.Count)
     {
@@ -195,6 +183,5 @@ List<string> merge(List<string> sinistra, List<string> destra)
         j++;
     }
 
-    return risultato;  
-
+    return risultato; 
 }
