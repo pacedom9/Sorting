@@ -1,17 +1,17 @@
 ﻿using System.Diagnostics;
 
-var percorsoRubricaCsv = @"C:\Users\dpace\Desktop\algoritmi.csv";
-var rubricaContattiOriginali = File.ReadAllLines(percorsoRubricaCsv).ToList();
-var rubricaInsertionSort = File.ReadAllLines(percorsoRubricaCsv).ToList();
-var rubricaSelectionSort = File.ReadAllLines(percorsoRubricaCsv).ToList();
-var rubricaMergeSort = File.ReadAllLines(percorsoRubricaCsv).ToList();
+string percorsoRubricaCsv = @"C:\Users\dpace\Desktop\algoritmi.csv";
+List<string> rubricaContattiOriginali = File.ReadAllLines(percorsoRubricaCsv).ToList();
+List<string> rubricaInsertionSort = File.ReadAllLines(percorsoRubricaCsv).ToList();
+List<string> rubricaSelectionSort = File.ReadAllLines(percorsoRubricaCsv).ToList();
+List<string> rubricaMergeSort = File.ReadAllLines(percorsoRubricaCsv).ToList();
 
-Stopwatch timer = new Stopwatch();
+Stopwatch timer = new Stopwatch(); 
 
-timer.Start();
-BubbleSort();
+timer.Start(); 
+BubbleSort(); 
 timer.Stop();
-TimeSpan trascorsoBubble = timer.Elapsed;
+TimeSpan trascorsoBubble = timer.Elapsed; 
 Console.WriteLine($"Il tempo impiegato dal Bubble Sort è stato di: {trascorsoBubble}");
 
 timer.Restart();
@@ -29,22 +29,22 @@ Console.WriteLine($"Il tempo impiegato dall'Insertion Sort è stato di: {trascor
 timer.Restart();
 MergeSort(rubricaMergeSort);
 timer.Stop();
-TimeSpan trascorsoMerge = timer.Elapsed;
+TimeSpan trascorsoMerge = timer.Elapsed; 
 Console.WriteLine($"Il tempo impiegato dal Merge Sort è stato di: {trascorsoMerge}");
 
-TimeSpan[] tempi = { trascorsoBubble, trascorsoSelection, trascorsoInsertion, trascorsoMerge };
+TimeSpan[] tempi = { trascorsoBubble, trascorsoSelection, trascorsoInsertion, trascorsoMerge }; 
 
-string[] nomiMetodi = { "il Bubble Sort", "il Selection Sort", "l'Insertion Sort", "il Merge Sort" };
-var appoggio = 0;
-for (int i = 1; i < tempi.Length; i++)
+string[] nomiMetodi = { "il Bubble Sort", "il Selection Sort", "l'Insertion Sort", "il Merge Sort" }; 
+int indiceMigliore = 0; 
+for (int i = 1; i < tempi.Length; i++) 
 {
-    if (tempi[i] < tempi[appoggio])
+    if (tempi[i] < tempi[indiceMigliore])
     {
-        appoggio = i;
+        indiceMigliore = i;
     }
-}
+} 
 
-Console.WriteLine($"L'algoritmo più performante è {nomiMetodi[appoggio]}, con un tempo di: {tempi[appoggio]}");
+Console.WriteLine($"L'algoritmo più performante è {nomiMetodi[indiceMigliore]}, con un tempo di: {tempi[indiceMigliore]}");
 string fileNuovo = @"C:\Users\dpace\Desktop\rubricaOrdinata.csv";
 
 File.WriteAllLines(fileNuovo, rubricaContattiOriginali);
@@ -63,7 +63,7 @@ void BubbleSort()
             string[] nominativiSecondoElemento = rubricaContattiOriginali[j + 1].Split(',');
 
 
-            var comparazione = string.Compare(nominativiPrimoElemento[0], nominativiSecondoElemento[0]);
+            int comparazione = string.Compare(nominativiPrimoElemento[0], nominativiSecondoElemento[0]);
 
             if (comparazione == 0)
             {
@@ -72,7 +72,7 @@ void BubbleSort()
 
             if (comparazione > 0)
             {
-                var contattoTemporaneo = rubricaContattiOriginali[j];
+                string contattoTemporaneo = rubricaContattiOriginali[j];
                 rubricaContattiOriginali[j] = rubricaContattiOriginali[j + 1];
                 rubricaContattiOriginali[j + 1] = contattoTemporaneo;
             }
@@ -86,14 +86,14 @@ void SelectionSort()
 {
     for (int i = 0; i < rubricaSelectionSort.Count - 1; i++)
     {
-        int minIndex = i;
+        int valoreMinimo = i;
 
         for (int j = i + 1; j < rubricaSelectionSort.Count; j++)
         {
-            var contattoMinimo = rubricaSelectionSort[minIndex].Split(',');
-            var contattoCorrente = rubricaSelectionSort[j].Split(',');
+            string[] contattoMinimo = rubricaSelectionSort[valoreMinimo].Split(',');
+            string[] contattoCorrente = rubricaSelectionSort[j].Split(',');
 
-            var comparazione = string.Compare(contattoCorrente[0], contattoMinimo[0]);
+            int comparazione = string.Compare(contattoCorrente[0], contattoMinimo[0]);
 
             if (comparazione == 0)
             {
@@ -102,16 +102,16 @@ void SelectionSort()
 
             if (comparazione < 0)
             {
-                minIndex = j;
+                valoreMinimo = j;
             }
         }
 
 
-        if (minIndex != i)
+        if (valoreMinimo != i)
         {
-            var appoggio = rubricaSelectionSort[i];
-            rubricaSelectionSort[i] = rubricaSelectionSort[minIndex];
-            rubricaSelectionSort[minIndex] = appoggio;
+            string appoggio = rubricaSelectionSort[i];
+            rubricaSelectionSort[i] = rubricaSelectionSort[valoreMinimo];
+            rubricaSelectionSort[valoreMinimo] = appoggio;
         }
     }
 }
@@ -120,7 +120,7 @@ void InsertionSort()
 {
     for (int i = 1; i < rubricaInsertionSort.Count; i++)
     {
-        var contattoDaInserire = rubricaInsertionSort[i]; 
+        string contattoDaInserire = rubricaInsertionSort[i]; 
         int j = i - 1; 
 
 
